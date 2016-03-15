@@ -8,7 +8,7 @@ random.seed(time.time())
 def main():
 	print('Welcome to the interactive fiction game')
 	
-	print('You have awoken in a strange cave there is a prism in front of you and a door to the north')
+	print('You have awoken in a strange cave there are 3 items in front of you')
 	
 	winning_options = [
 				'get all', 'open door',
@@ -56,6 +56,10 @@ def main():
 			print('Enter x')
 			print('Exit x')	
 			
+		#word = input_choice.split(' ')
+		#for item in list_options
+		#if word == item:
+		#print('it is a valid option')
 	
 		for item in winning_options:
 			if input_choice == item:
