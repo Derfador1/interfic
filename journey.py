@@ -54,28 +54,41 @@ def main():
 			print('Down x')
 			print('Wait x')
 			print('Enter x')
-			print('Exit x')	
+			print('Exit x')
 			
+		str1 = input_choice.split(' ')
+		
+		for item in str1:
+			print(item)
+			
+		def get(item):
+			print('Getting all loot')
+
+		#for item in list_option:
+			#if item == input_choices:
+				#player.item
+			#else:
+		
 		#word = input_choice.split(' ')
 		#for item in list_options
 		#if word == item:
 		#print('it is a valid option')
 	
-		for item in winning_options:
-			if input_choice == item:
-				winning_options.remove(item)
+		#for item in winning_options:
+			#if input_choice == item:
+				#winning_options.remove(item)
 
-		print('printing list')
+		#print('printing list')
 				
-		for item in winning_options:
-			print(item)
+		#for item in winning_options:
+			#print(item)
 		
 		
-		if len(winning_options) == 0:
-			print('We are done')
-			break
-		else:
-			print('Still things left')
+		#if len(winning_options) == 0:
+			#print('We are done')
+			#break
+		#else:
+			#print('Still things left')
 
 
 
