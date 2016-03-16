@@ -2,6 +2,8 @@
 
 import random
 import time
+import os
+import area as a
 
 random.seed(time.time())
 
@@ -13,14 +15,26 @@ def light():
 	output = 'Lighting...'
 	return output
 	
-def player_death():
-	random_list = [
-		'giant rhinocerous with 12 horns!!', 
-		'a falling stone you pleb!', 
-		'tripping and falling on a rake that then flew up and hit a '
-		'match which hit lit some dynamite which exploded',
-		'seeing a squirrel and had a heart attack'
+def drop():
+	output = 'Dropping things...'
+	return output
+	
+def examine():
+	output = 'examining...'
+	return output
+		
+def print_menu():
+	menu = [
+		'opening menu...', 'Light x',
+		'Examine x', 'Get/Take x',
+		'Drop x', 'Put x In y',
+		'North x', 'West x',
+		'South x', 'East x',
+		'Up x', 'Down x',
+		'Wait x', 'Enter x',
+		'Exit x'
 		]
+	return menu
 
 def main():
 	print('Welcome to the interactive fiction game')
@@ -38,42 +52,79 @@ def main():
 		'exit cave', 'north', 
 		'get meaning of life'
 		]
-		
-
-	list_options = [
-		'light', 'examine', 
-		'get', 'take', 
-		'drop', 'put', 
-		'north', 'west', 
-		'south', 'east', 
-		'up', 'down', 
-		'wait', 'enter', 
-		'exit'
+	
+	scene_descrip = [
+		'You are on a hill!',
+		'Stuff is in front of you',
+		'You are stepping in poop',
+		'I am looking at you'
 		]
+
+	#list_options = [
+		#'light', 'examine', 
+		#'get', 'take', 
+		#'drop', 'put', 
+		#'north', 'west', 
+		#'south', 'east', 
+		#'up', 'down', 
+		#'wait', 'enter', 
+		#'exit'
+		#]
 				
-	dict_choice = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop}	
+	#dict_choice = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop}	
 	
 	step = 0
 	
-	while True:	
-		input_choice = input('Enter a command: ')
+	player = a.Player()
+	
+	while True:
+		player.choose()
+		scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
+		#make def in scene to give description if we have moved to the next scene
+		print('You have entered a new area...: ' + scene._description)
 		
-		if input_choice == 'h':
+		if scene.get_winning_actions(player):
+			print('that was correct option')
+			#create a new list
+			step += 1
+		else:
+			death = player.player_death()
+			print(death)
+			break
+		
+		response = player.get_actions()
+		print(response)
+
+		#break
+		#os.system('clear')
+		#if input_choice == 'h':
 			#menu = print_menu()
 			#for item in menu:
-			#	print(item)
+				#print(item)
 			
-		str1 = input_choice.split(' ')
+		#str1 = input_choice.split(' ')
 		
-		for item in list_options:
-			if str1[0] == item:
-				output = dict_choice[item]()
-				print(output)
+		##make a cpital function so its all capital or is lower
+		
+		#for item in dict_choice:
+			#if str1[0] == item:
+				#output = dict_choice[item]()
+				#print(output)
 
-		#for item in list_option:
-			#if item == input_choices:
-				#player.item
-			#else:
+
+		#if not str1[0] in dict_choice:
+			#if str1[0] == 'h':
+				#continue
+			#print('Fudge you')
+		#step += 1
+		
+		
+		#if input_choice == 'GET ALL':
+			#if step != 1:
+				#print('Not correct positon')
+		#elif input_choice == 'OPEN DOOR':
+			#if step < 2:
+				#print('ew'')
 		
 		#word = input_choice.split(' ')
 		#for item in list_options
@@ -101,12 +152,10 @@ def main():
 		#else 
 		#break because i am done
 		
-		if step == 20:
-			output = player_death()
-			print(output)
-			break
-		
-		step += 1
+		#if step == 20:
+			#output = player_death()
+			#print(output)
+			#break
 
 
 
