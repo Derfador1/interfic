@@ -11,6 +11,14 @@ def get():
 	output = 'getting...'
 	return output
 	
+def wait():
+	output = 'waiting...'
+	return output
+
+def put():
+	output = 'putting...'
+	return output
+	
 def light():
 	output = 'lighting...'
 	return output
@@ -77,7 +85,7 @@ def print_menu():
 	return menu
 
 
-action_dict = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop}
+action_dict = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop, 'wait':wait, 'put':put}
 move_dict = {'north':north, 'open':open1, 'west':west, 'east':east, 'south':south, 'up':up, 'down':down, 'enter':enter, 'exit':exit1}
 
 class Game:
@@ -93,7 +101,7 @@ class Game:
 				if str1[0] == item:
 					output = action_dict[item]()
 					return(output)
-		else:
+		elif not str1[0] in action_dict:
 			for item in move_dict:
 				if str1[0] == item:
 					output = move_dict[item]()
@@ -101,7 +109,7 @@ class Game:
 	
 			
 		if not str1[0] in move_dict or action_dict:
-			output = 'Fudge you'
+			output = 'That was an incorrect option'
 			if str1[0] == 'h':
 				menu = print_menu()
 				return(menu)
@@ -116,10 +124,8 @@ class Game:
 		str1 = other._choice.split(' ')		
 		
 		if not str1[0] in move_dict:
-			print('here1')
 			self._action = 'action'
 		else:
-			print('here2')
 			self._action = 'move'
 		
 
@@ -149,6 +155,7 @@ class Scene(Game):
 	def __init__(self, winning_action, description):
 		super().__init__(winning_action)
 		self._description = description
+		#path info here
 		self._item1 = None
 		self._item2 = None
 		
@@ -158,6 +165,8 @@ class Scene(Game):
 			self._item2 = 'Prism'
 		elif step == 3:
 			self._item1 = 'Edelweiss'
+		elif step == 13:
+			self._item = 'Meaning of life'
 		
 		
 		
