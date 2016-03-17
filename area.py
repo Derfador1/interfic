@@ -5,84 +5,67 @@ import time
 import journey as j
 
 random.seed(time.time())
-
 	
-def get():
+def get(self):
 	output = 'getting...'
 	return output
 	
-def wait():
+def wait(self):
 	output = 'waiting...'
 	return output
 
-def put():
+def put(self):
+	#remove from list
 	output = 'putting...'
 	return output
 	
-def light():
+def light(self):
 	output = 'lighting...'
 	return output
 	
-def drop():
+def drop(self):
 	output = 'dropping things...'
 	return output
 	
-def examine():
+def examine(self):
 	output = 'examining...'
 	return output
-	
-def open():
-	output = 'opening...'
-	return output
 
-def north():
+def north(self):
 	output = 'going north...'
 	return output
 
-def open1():
+def open1(self):
 	output = 'opening...'
 	return output
 	
-def west():
+def west(self):
 	output = 'going west...'
 	return output
 
-def east():
+def east(self):
 	output = 'going east...'
 	return output
 
-def south():
+def south(self):
 	output = 'going south...'
 	return output
 	
-def up():
+def up(self):
 	output = 'going up...'
 	return output
 	
-def down():
+def down(self):
 	output = 'going down...'
 	return output
 
-def enter():
+def enter(self):
 	output = 'entering...'
 	return output
 	
-def exit1():
+def exit1(self):
 	output = 'exiting...'
 	return output
-
-def print_menu():
-	menu = [
-		'opening menu...', 'Light x',
-		'Examine x', 'Get/Take x',
-		'Drop x', 'Put x In y',
-		'North x', 'West x',
-		'South x', 'East x',
-		'Up x', 'Down x',
-		'Wait x', 'Enter x',
-		'Exit x'
-		]
-	return menu
 
 
 action_dict = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop, 'wait':wait, 'put':put}
@@ -99,20 +82,19 @@ class Game:
 		if not str1[0] in move_dict:
 			for item in action_dict:
 				if str1[0] == item:
-					output = action_dict[item]()
+					output = action_dict[item](self)
 					return(output)
 		elif not str1[0] in action_dict:
 			for item in move_dict:
 				if str1[0] == item:
-					output = move_dict[item]()
+					output = move_dict[item](self)
 					return(output)
 	
-			
 		if not str1[0] in move_dict or action_dict:
 			output = 'That was an incorrect option'
 			if str1[0] == 'h':
-				menu = print_menu()
-				return(menu)
+				menu = 'h'
+				return menu
 			return(output)
 
 	def get_winning_actions(self, other):
@@ -155,7 +137,6 @@ class Scene(Game):
 	def __init__(self, winning_action, description):
 		super().__init__(winning_action)
 		self._description = description
-		#path info here
 		self._item1 = None
 		self._item2 = None
 		
