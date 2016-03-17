@@ -10,21 +10,38 @@ def get(self):
 	output = 'getting...'
 	return output
 	
-def wait(self):
+def wait(self, other):
 	output = 'waiting...'
 	return output
 
 def put(self):
-	#remove from list
-	output = 'putting...'
+	str1 = self._choice.split(' ')
+
+	x = str1[1]
+	y = str1[3]
+	
+	if x in self._lootbag:
+		if x == x or x == y:
+			self._lootbag.remove(x)
+
+	output = 'putting...' + x + ' in ' + y
 	return output
 	
 def light(self):
-	output = 'lighting...'
+	output = 'lighting...' 
 	return output
 	
 def drop(self):
-	output = 'dropping things...'
+	str1 = self._choice.split(' ')
+
+	x = str1[1]
+	
+	if x in self._lootbag:
+		self._lootbag.remove(x)
+		output = 'dropping ' + x + '...'
+	else:
+		output = 'Not in bag'
+
 	return output
 	
 def examine(self):
@@ -119,6 +136,7 @@ class Player(Game):
 
 	def choose(self):
 		self._choice = input('Enter a command: ')
+		#case insensitive
 		
 	def player_death(self):
 		random_list = [
