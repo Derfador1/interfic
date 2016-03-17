@@ -26,8 +26,7 @@ def print_menu():
 def main():
 	print('Welcome to the interactive fiction game')
 	
-	print('You have awoken in a room with a pinching'
-		  'pain in your neck, you were drugged!: ')
+	print('You have awoken from a deep sleep , begin playing or die?')
 	
 	winning_options = [
 		'get all', 'open door',
@@ -74,6 +73,9 @@ def main():
 		elif response == 'Not in bag':
 			print(response)
 			continue
+		elif response == 'examining...':
+			print(response + '\n' + scene._description)
+			continue
 		
 		if step == 0 or step == 3 or step == 13:
 			if scene._action == 'move':
@@ -89,10 +91,10 @@ def main():
 			if not scene._item1 == None:
 				print(scene._item1)
 			if not scene._item2 == None:
-				print(scene._item2) 
+				print(scene._item2)
 		
-		if scene._action == 'move':
-			print('You have entered an area...' + scene._description)
+		#if scene._action == 'move':
+			#print('You have entered an area...' + scene._description)
 
 		if scene.get_winning_actions(player):
 			print('that was the correct option')
@@ -104,7 +106,7 @@ def main():
 			break
 			
 		if set(answer) == set(winning_options):
-			print('winner winner chicken dinner')
+			print('you have won')
 			break
 	
 
