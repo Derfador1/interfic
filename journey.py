@@ -61,12 +61,17 @@ def main():
 		
 		scene.check_move(player)
 		
+		#case insensitive
+		
 		response = player.get_actions()
 		
 		if response == 'h':
 			print_menu()
 			continue
 		elif response == 'That was an incorrect option':
+			print(response)
+			continue
+		elif response == 'Not in bag':
 			print(response)
 			continue
 		
@@ -90,7 +95,7 @@ def main():
 			print('You have entered an area...' + scene._description)
 
 		if scene.get_winning_actions(player):
-			print('that was correct option')
+			print('that was the correct option')
 			answer.append(player._choice)
 			step += 1
 		else:		#could remove this to allow player to keep going to get to good path the round about way
