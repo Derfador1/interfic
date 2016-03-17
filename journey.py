@@ -7,10 +7,25 @@ import area as a
 
 random.seed(time.time())
 
+def print_menu():
+	menu = [
+		'opening menu...', 'Light x',
+		'Examine x', 'Get/Take x',
+		'Drop x', 'Put x In y',
+		'North x', 'West x',
+		'South x', 'East x',
+		'Up x', 'Down x',
+		'Wait x', 'Enter x',
+		'Exit x'
+		]
+	for item in menu:
+		print(item)
+
 def main():
 	print('Welcome to the interactive fiction game')
 	
-	print('You have awoken in a strange cave there are items in front of you : ')
+	print('You have awoken in a room with a pinching'
+		  'pain in your neck, you were drugged!: ')
 	
 	winning_options = [
 		'get all', 'open door',
@@ -25,10 +40,10 @@ def main():
 		]
 	
 	scene_descrip = [
-		'You are on a hill!',
-		'Stuff is in front of you',
-		'You are stepping in poop',
-		'I am looking at you'
+		'You have entered a cave!',
+		'You are in a field',
+		'You entered an archway and now you are standing in poo',
+		'you entered a door, I am looking at you....but you dont see me'
 		]
 	
 	step = 0
@@ -48,7 +63,10 @@ def main():
 		
 		response = player.get_actions()
 		
-		if response == 'That was an incorrect option':
+		if response == 'h':
+			print_menu()
+			continue
+		elif response == 'That was an incorrect option':
 			print(response)
 			continue
 		
@@ -56,11 +74,20 @@ def main():
 			if scene._action == 'move':
 				print('You should probably get the things in this room before anything else')
 				continue
-
+				
 		print(response)
+					
+		if response == 'getting...':
+			player._lootbag.append(scene._item1)
+			player._lootbag.append(scene._item2)
+			
+			if not scene._item1 == None:
+				print(scene._item1)
+			if not scene._item2 == None:
+				print(scene._item2) 
 		
 		if scene._action == 'move':
-			print('You have entered an area... ' + scene._description)
+			print('You have entered an area...' + scene._description)
 
 		if scene.get_winning_actions(player):
 			print('that was correct option')
@@ -70,10 +97,6 @@ def main():
 			death = player.player_death()
 			print(death)
 			break
-				
-		if response == 'getting...' or 'taking...':
-			player._lootbag.append(scene._item1)
-			player._lootbag.append(scene._item2)
 			
 		if set(answer) == set(winning_options):
 			print('winner winner chicken dinner')
