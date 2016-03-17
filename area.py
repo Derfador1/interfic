@@ -136,7 +136,7 @@ class Player(Game):
 
 	def choose(self):
 		self._choice = input('Enter a command: ')
-		#case insensitive
+		self._choice = self._choice.lower()
 		
 	def player_death(self):
 		random_list = [
