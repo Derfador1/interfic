@@ -4,6 +4,8 @@ import random
 import time
 import os
 import area as a
+import sys
+import signal
 
 random.seed(time.time())
 
@@ -61,8 +63,6 @@ def main():
 		
 		scene.check_move(player)
 		
-		#case insensitive
-		
 		response = player.get_actions()
 		
 		if response == 'h':
@@ -109,4 +109,11 @@ def main():
 	
 
 if __name__ == "__main__":
-	main()
+	try:
+		main()
+	except KeyboardInterrupt:
+		print('\nInterrupted...')
+		try:
+			sys.exit(0)
+		except SystemExit:
+			os._exit(0)
