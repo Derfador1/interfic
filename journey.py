@@ -12,7 +12,7 @@ random.seed(time.time())
 def print_menu():
 	menu = [
 		'opening menu...', 'Light x',
-		'Examine x', 'Get/Take x',
+		'Examine', 'Get/Take x',
 		'Drop x', 'Put x In y',
 		'North x', 'West x',
 		'South x', 'East x',
@@ -52,14 +52,14 @@ def main():
 	player = a.Player()
 	answer = []
 	
+	scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
+		
 	while True:
 		player.choose()
-
 		os.system('clear')
-
-		scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
-		scene.create_treasure(step)
 		
+		scene.create_treasure(step)
+						
 		scene.check_move(player)
 		
 		response = player.get_actions()
@@ -75,6 +75,12 @@ def main():
 			continue
 		elif response == 'examining...':
 			print(response + '\n' + scene._description)
+			
+			print(scene._item1)
+			print(scene._item2)
+			
+			#make check to print these items
+			
 			continue
 		
 		if step == 0 or step == 3 or step == 13:
@@ -94,12 +100,13 @@ def main():
 				print(scene._item2)
 		
 		#if scene._action == 'move':
-			#print('You have entered an area...' + scene._description)
-
+		#	scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
+			
 		if scene.get_winning_actions(player):
 			print('that was the correct option')
 			answer.append(player._choice)
 			step += 1
+			scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
 		else:		#could remove this to allow player to keep going to get to good path the round about way
 			death = player.player_death()
 			print(death)
