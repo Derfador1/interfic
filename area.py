@@ -10,7 +10,7 @@ def get(self):
 	output = 'getting...'
 	return output
 	
-def wait(self, other):
+def wait(self):
 	output = 'waiting...'
 	return output
 
@@ -35,13 +35,15 @@ def drop(self):
 	str1 = self._choice.split(' ')
 
 	x = str1[1]
-	
-	if x in self._lootbag:
-		self._lootbag.remove(x)
-		output = 'dropping ' + x + '...'
-	else:
-		output = 'Not in bag'
 
+	output = 'Not in bag'
+
+	for item in self._lootbag:
+		if item == x:
+			print('here')
+			self._lootbag.remove(x)
+			output = 'dropping ' + x + '...'
+			
 	return output
 	
 def examine(self):
@@ -160,12 +162,12 @@ class Scene(Game):
 		
 	def create_treasure(self, step):
 		if step == 0:
-			self._item1 = 'Helmet'
-			self._item2 = 'Prism'
+			self._item1 = 'helmet'
+			self._item2 = 'prism'
 		elif step == 3:
-			self._item1 = 'Edelweiss'
+			self._item1 = 'edelweiss'
 		elif step == 13:
-			self._item = 'Meaning of life'
+			self._item = 'meaning of life'
 		
 		
 		
