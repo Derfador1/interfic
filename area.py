@@ -169,6 +169,10 @@ class Scene(Game):
 		elif step == 13:
 			self._item = 'meaning of life'
 		
+	def update(self, new_descrip, action):
+		self._descrip = new_descrip
+		self._winning_action = action
+		
 		
 		
 
