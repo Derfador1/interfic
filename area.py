@@ -40,7 +40,6 @@ def drop(self):
 
 	for item in self._lootbag:
 		if item == x:
-			print('here')
 			self._lootbag.remove(x)
 			output = 'dropping ' + x + '...'
 			
@@ -48,6 +47,10 @@ def drop(self):
 	
 def examine(self):
 	output = 'examining...'
+	return output
+
+def look(self):
+	output = 'looking...'
 	return output
 
 def north(self):
@@ -91,7 +94,7 @@ def exit1(self):
 	return output
 
 
-action_dict = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop, 'wait':wait, 'put':put}
+action_dict = {'light':light, 'examine': examine, 'get':get, 'take':get, 'drop':drop, 'wait':wait, 'put':put, 'look':look}
 move_dict = {'north':north, 'open':open1, 'west':west, 'east':east, 'south':south, 'up':up, 'down':down, 'enter':enter, 'exit':exit1}
 
 class Game:
@@ -100,7 +103,7 @@ class Game:
 		self._action = None
 		
 	def get_actions(self):
-		str1 = self._choice.split(' ')
+		str1 = self._choice.split()
 	
 		if not str1[0] in move_dict:
 			for item in action_dict:
@@ -121,12 +124,17 @@ class Game:
 			return(output)
 
 	def get_winning_actions(self, other):
-		if other._choice == self._winning_action:
+		str1 = other._choice.split()
+		str2 = self._winning_action.split()
+
+		if str1[0] == 'take':
+			str1[0] = 'get'
+		if str1 == str2:
 			return True
 		return False
 
 	def check_move(self, other):
-		str1 = other._choice.split(' ')		
+		str1 = other._choice.split()		
 		
 		if not str1[0] in move_dict:
 			self._action = 'action'
@@ -173,8 +181,7 @@ class Scene(Game):
 		elif step == 13:
 			self._item = 'meaning of life'
 		
-	def update(self, new_descrip, action):
-		self._descrip = new_descrip
+	def scene_update(self, action):
 		self._winning_action = action
 		
 		
