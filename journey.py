@@ -115,6 +115,8 @@ def main():
 		if scene.get_winning_actions(player):
 			print('That was the only correct option!')
 			answer.append(player._choice)
+			print('step')
+			print(step)
 			if step < 13:
 				step += 1
 				
