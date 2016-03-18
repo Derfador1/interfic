@@ -55,11 +55,11 @@ def main():
 	scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
 		
 	while True:
+		scene.create_treasure(step)
+		
 		player.choose()
 		os.system('clear')
-		
-		scene.create_treasure(step)
-						
+								
 		scene.check_move(player)
 		
 		response = player.get_actions()
@@ -105,7 +105,8 @@ def main():
 		if scene.get_winning_actions(player):
 			print('that was the correct option')
 			answer.append(player._choice)
-			step += 1
+			if step < 13:
+				step += 1
 			scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
 		else:		#could remove this to allow player to keep going to get to good path the round about way
 			death = player.player_death()
