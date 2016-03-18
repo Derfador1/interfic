@@ -22,30 +22,35 @@ def print_menu():
 		]
 	for item in menu:
 		print(item)
+		
+
+winning_options = [
+	'get all', 'open door',
+	'east', 'get edelweiss',
+	'up', 'enter cave', 
+	'light fire', 'wait', 
+	'put edelweiss in fire', 
+	'put helmet in statue', 
+	'put prism in pickle', 
+	'exit cave', 'north', 
+	'get meaning of life'
+	]
+
+scene_descrip = [
+	'You have entered a cave!',
+	'You are in a field',
+	'You entered an archway and now you are standing in poo',
+	'you entered a door, I am looking at you....but you dont see me'
+	]
 
 def main():
 	print('Welcome to the interactive fiction game')
 	
 	print('You have awoken from a deep sleep , begin playing or die?')
-	
-	winning_options = [
-		'get all', 'open door',
-		'east', 'get edelweiss',
-		'up', 'enter cave', 
-		'light fire', 'wait', 
-		'put edelweiss in fire', 
-		'put helmet in statue', 
-		'put prism in pickle', 
-		'exit cave', 'north', 
-		'get meaning of life'
-		]
-	
-	scene_descrip = [
-		'You have entered a cave!',
-		'You are in a field',
-		'You entered an archway and now you are standing in poo',
-		'you entered a door, I am looking at you....but you dont see me'
-		]
+	print('Now you might be wondering , who the hell is talking to me right now!')
+	print('Why the hell am I playing this game, I was just sipping coffee! Well')
+	print('no longer, you are now playing this game and choose rightly or you')
+	print('will die! (one hint, "look" to see what is around)')
 	
 	step = 0
 	
@@ -73,14 +78,19 @@ def main():
 		elif response == 'Not in bag':
 			print(response)
 			continue
-		elif response == 'examining...':
+		elif response == 'looking...':
 			print(response + '\n' + scene._description)
 			
-			print(scene._item1)
-			print(scene._item2)
-			
-			#make check to print these items
-			
+			if not scene._item1 == None and not scene._item2 == None:
+				print('Before you is an', scene._item1)
+				print('There is also a', scene._item2)
+			elif scene._item1 == None and not scene._item2 == None:
+				print('Before you is an', scene._item1)
+			elif scene._item2 == None and not scene._item1 == None:
+				print('Before you is an', scene._item1)
+			else:
+				print('No items')
+				
 			continue
 		
 		if step == 0 or step == 3 or step == 13:
@@ -98,16 +108,21 @@ def main():
 				print(scene._item1)
 			if not scene._item2 == None:
 				print(scene._item2)
+				
+			scene._item1 = None
+			scene._item2 = None
 		
-		#if scene._action == 'move':
-		#	scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
-			
 		if scene.get_winning_actions(player):
 			print('that was the correct option')
 			answer.append(player._choice)
 			if step < 13:
 				step += 1
-			scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
+				
+			if scene._action == 'move':
+				scene = a.Scene(winning_options[step], scene_descrip[random.randint(0, 3)])
+			else:
+				scene.scene_update(winning_options[step])
+
 		else:		#could remove this to allow player to keep going to get to good path the round about way
 			death = player.player_death()
 			print(death)
