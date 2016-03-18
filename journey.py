@@ -85,9 +85,9 @@ def main():
 				print('Before you is an', scene._item1)
 				print('There is also a', scene._item2)
 			elif scene._item1 == None and not scene._item2 == None:
-				print('Before you is an', scene._item1)
+				print('Before you is a', scene._item2)
 			elif scene._item2 == None and not scene._item1 == None:
-				print('Before you is an', scene._item1)
+				print('Before you is a', scene._item1)
 			else:
 				print('No items')
 				
@@ -113,7 +113,7 @@ def main():
 			scene._item2 = None
 		
 		if scene.get_winning_actions(player):
-			print('that was the correct option')
+			print('That was the only correct option!')
 			answer.append(player._choice)
 			if step < 13:
 				step += 1
