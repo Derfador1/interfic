@@ -179,7 +179,6 @@ class Scene(Game):
 		elif step == 3:
 			self._item1 = 'edelweiss'
 		elif step == 13:
-			print('poop')
 			self._item1 = 'meaning of life'
 		
 	def scene_update(self, action):
