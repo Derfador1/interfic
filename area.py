@@ -79,6 +79,10 @@ def down(self):
 	return output
 
 def enter(self):
+	#str1 = self._choice.split(' ')
+	#x = str1[1]
+	#if x == 'cave':
+	#	other._descrip = 'You are in a dark cave'
 	output = 'entering...'
 	return output
 	
