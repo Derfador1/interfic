@@ -16,7 +16,7 @@ def wait(self):
 
 def put(self):
 	str1 = self._choice.split(' ')
-
+	#pulls the 2 needed words from the choice
 	x = str1[1]
 	y = str1[3]
 	
@@ -40,6 +40,7 @@ def drop(self):
 
 	for item in self._lootbag:
 		if item == x:
+			#remove from lootbag and print what was dropped
 			self._lootbag.remove(x)
 			output = 'dropping ' + x + '...'
 			
@@ -104,7 +105,7 @@ class Game:
 		
 	def get_actions(self):
 		str1 = self._choice.split()
-	
+		#check to see if its in action dictionary or move dictionary
 		if not str1[0] in move_dict:
 			for item in action_dict:
 				if str1[0] == item:
@@ -124,9 +125,11 @@ class Game:
 			return(output)
 
 	def get_winning_actions(self, other):
+		#split the choice and winning action into a list
 		str1 = other._choice.split()
 		str2 = self._winning_action.split()
 
+		#makes get and take the same word
 		if str1[0] == 'take':
 			str1[0] = 'get'
 		if str1 == str2:
